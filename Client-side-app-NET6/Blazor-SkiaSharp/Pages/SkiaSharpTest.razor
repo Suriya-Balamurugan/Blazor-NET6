@@ -1,0 +1,40 @@
+﻿@page "/skiasharptest"
+@inject Microsoft.JSInterop.IJSRuntime JS
+@inject HttpClient client
+@using SkiaSharp;
+@using System.IO
+
+<h2>Hello, world!</h2>
+<p>Click the button to draw the text using SkiaSharp.</p>
+<button class="btn btn-primary" @onclick="@Create">Create</button>
+
+<p role="status">Status: @msg</p>
+
+@functions {
+    public string msg = string.Empty;
+    async void Create()
+    {
+        try
+        {
+            //Get the text to draw.
+            String drawText = "Hello";
+            //Create sKImageInfo object
+            SKImageInfo sKImageInfo = new SKImageInfo(612, 792);
+            SKSurface sKSurface = SKSurface.Create(sKImageInfo);
+            SKCanvas canvas = sKSurface.Canvas;
+            //Create font. 
+            SKTypeface sKTypeface = SKTypeface.FromFamilyName("Calibri Light", SKFontStyle.Bold);
+            SKPaint paint = new SKPaint();
+            paint.TextSize = 11f;
+            paint.Typeface = sKTypeface;
+            canvas.DrawText(drawText, 0, 0, paint);
+            msg = "End";
+        }
+        catch (Exception ex)
+        {
+            msg = ex.ToString();
+            msg += ex.Message;
+            msg += ex.StackTrace.ToString();
+        }
+    }
+}
