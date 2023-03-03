@@ -23,13 +23,13 @@ jobs:
           include-prerelease: true
 
       - name: Restore
-        run: dotnet workload restore "././Client-side-app-NET6/Blazor-SkiaSharp.sln"
+        run: dotnet workload restore "././Client-side-application/Convert-Word-to-PDF.sln"
       
       - name: Build with dotnet
-        run: dotnet build "././Client-side-app-NET6/Blazor-SkiaSharp.sln" --configuration Release
+        run: dotnet build "././Client-side-application/Convert-Word-to-PDF.sln" --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish "././Client-side-app-NET6/Blazor-SkiaSharp.sln" -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish "././Client-side-application/Convert-Word-to-PDF.sln" -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
